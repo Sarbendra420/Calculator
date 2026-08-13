@@ -141,3 +141,34 @@ backSpaceBtn.addEventListener('click', () => {
         display.textContent = newDisplay;
     }
 });
+
+
+window.addEventListener('keydown', (e) => {
+    e.preventDefault();
+
+    if (e.key >= '0' && e.key <= '9') {
+        const button = Array.from(numberButtons).find(btn => btn.textContent.trim() === e.key);
+        if (button) button.click();
+    }
+
+    if (['+', '-', '*', '/'].includes(e.key)) {
+        const button = Array.from(operatorButtons).find(btn => btn.textContent.trim() === e.key);
+        if (button) button.click();
+    }
+
+    if (e.key === '=' || e.key === 'Enter') {
+        equalButton.click();
+    }
+    
+    if (e.key === 'Backspace') {
+        backSpaceBtn.click();
+    }
+    
+    if (e.key === 'Escape' || e.key.toLocaleLowerCase() === 'c') {
+        clear.click();
+    }
+
+    if (e.key === '.') {
+        decimalButton.click();
+    }
+});
