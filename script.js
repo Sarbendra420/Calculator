@@ -22,6 +22,7 @@ function divide(a, b) {
 let firstNumber = 0;
 let secondNumber = 0;
 let operator = "";
+let shouldResetDisplay = false;
 
 
 function operate(operation, num1, num2) {
@@ -41,14 +42,16 @@ const numberButtons = document.querySelectorAll('.number-btn');
 
 numberButtons.forEach((button) => {
     button.addEventListener('click', () => {
-        if (display.textContent === '0'){
+        if (shouldResetDisplay) {
+            display.textContent = button.textContent; 
+            shouldResetDisplay = false;               
+        } else if (display.textContent === '0'){
             display.textContent = button.textContent;
         } else {
             display.textContent += button.textContent;
         }
-        
     })
-})
+});
 
 
 const clear = document.querySelector('#clear');
@@ -58,5 +61,34 @@ clear.addEventListener('click', () => {
     secondNumber = 0;
     operator = null;
 });
+
+
+const operatorButtons = document.querySelectorAll('.operator');
+
+operatorButtons.forEach((operatorBtn) => {
+    operatorBtn.addEventListener('click', () => {
+        firstNumber = display.textContent;
+        operator = operatorBtn.textContent;
+        shouldResetDisplay = true;
+    })
+});
+
+
+
+const equalButton = document.querySelector('#equal');
+
+equalButton.addEventListener('click', () => {
+    if (!firstNumber || !operator ) return;
+
+    secondNumber = display.textContent;
+
+    let result = operate(operator, Number(firstNumber), Number(secondNumber));
+    display.textContent = result;
+
+    firstNumber = result;
+    operator = null;
+    shouldResetDisplay = true;
+});
+
 
 
