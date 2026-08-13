@@ -15,7 +15,12 @@ function multiply(a, b) {
 
 
 function divide(a, b) {
-    return a / b;
+    if ( b === 0){
+        return "Nice Try!";
+    } else {
+        return a / b;
+    }
+    
 }
 
 
@@ -26,16 +31,27 @@ let shouldResetDisplay = false;
 
 
 function operate(operation, num1, num2) {
+
+    let result;
+
     if (operation === "+") {
-        return add(num1, num2);
+        result = add(num1, num2);
     } else if (operation === "-") {
-        return subtract(num1, num2);
+        result = subtract(num1, num2);
     } else if (operation === "*") {
-        return multiply(num1, num2);
+        result = multiply(num1, num2);
     } else if (operation === "/") {
-        return divide(num1, num2);
+        result = divide(num1, num2);
     }
+
+    if (typeof result === "number") {
+        return Math.round(result * 10000) / 10000;
+    }
+
+    return result;
 }
+
+
 
 const display = document.querySelector('#display');
 const numberButtons = document.querySelectorAll('.number-btn');
@@ -67,7 +83,16 @@ const operatorButtons = document.querySelectorAll('.operator');
 
 operatorButtons.forEach((operatorBtn) => {
     operatorBtn.addEventListener('click', () => {
-        firstNumber = display.textContent;
+
+        if (firstNumber && operator && !shouldResetDisplay) {
+            secondNumber = display.textContent;
+            let result = operate(operator, Number(firstNumber), Number(secondNumber));
+            display.textContent = result;
+            firstNumber = result;
+        } else {
+            firstNumber = display.textContent;
+        }
+        
         operator = operatorBtn.textContent;
         shouldResetDisplay = true;
     })
@@ -91,4 +116,13 @@ equalButton.addEventListener('click', () => {
 });
 
 
+const decimalButton = document.querySelector('#decimal');
 
+decimalButton.addEventListener('click', () => {
+    if (shouldResetDisplay){
+        display.textContent = '0.';
+        shouldResetDisplay = false;
+    } else if (!display.textContent.includes('.')) {
+        display.textContent += '.';
+    }
+});

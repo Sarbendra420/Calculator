@@ -54,7 +54,7 @@ body {
     cursor: pointer;
 }
 
-#backspace {
+#backspace, #decimal {
     border: none;
     border-radius: 8px;
 }
