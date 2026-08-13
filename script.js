@@ -126,3 +126,18 @@ decimalButton.addEventListener('click', () => {
         display.textContent += '.';
     }
 });
+
+
+const backSpaceBtn = document.querySelector('#backspace');
+
+backSpaceBtn.addEventListener('click', () => {
+    if (shouldResetDisplay) return;
+
+    let newDisplay = display.textContent.slice(0, -1);
+
+    if (newDisplay === "") {
+        display.textContent = "0";
+    } else {
+        display.textContent = newDisplay;
+    }
+});
