@@ -36,4 +36,3 @@ function operate(operation, num1, num2) {
     }
 }
 
-console.log(operate("-", 50, 2));
