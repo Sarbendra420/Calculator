@@ -36,3 +36,27 @@ function operate(operation, num1, num2) {
     }
 }
 
+const display = document.querySelector('#display');
+const numberButtons = document.querySelectorAll('.number-btn');
+
+numberButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        if (display.textContent === '0'){
+            display.textContent = button.textContent;
+        } else {
+            display.textContent += button.textContent;
+        }
+        
+    })
+})
+
+
+const clear = document.querySelector('#clear');
+clear.addEventListener('click', () => {
+    display.textContent = 0;
+    firstNumber = 0;
+    secondNumber = 0;
+    operator = null;
+});
+
+
