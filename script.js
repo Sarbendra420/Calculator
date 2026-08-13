@@ -2,7 +2,7 @@
 function add(a, b) {
     return a + b;
 }
-console.log(add(5, 15));
+
 
 function subtract(a, b) {
     return a - b;
@@ -17,3 +17,23 @@ function multiply(a, b) {
 function divide(a, b) {
     return a / b;
 }
+
+
+let firstNumber = 0;
+let secondNumber = 0;
+let operator = "";
+
+
+function operate(operation, num1, num2) {
+    if (operation === "+") {
+        return add(num1, num2);
+    } else if (operation === "-") {
+        return subtract(num1, num2);
+    } else if (operation === "*") {
+        return multiply(num1, num2);
+    } else if (operation === "/") {
+        return divide(num1, num2);
+    }
+}
+
+console.log(operate("-", 50, 2));
